@@ -1,0 +1,19 @@
+.messageStyle {
+  color: green;
+  background-color: lightgray;
+  font-size: 30px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.redMessage {
+  color: red;
+  background-color: lightgray;
+  font-size: 30px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
