@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { generateVote, createAnecdote } from './reducers/anecdoteReducer'
+import AnecodoteForm from './components/AnecdoteForm'
+import { generateVote } from './reducers/anecdoteReducer'
 
 const App = () => {
   //array sorted method
@@ -9,13 +10,6 @@ const App = () => {
 
   const vote = (id) => {
     dispatch(generateVote(id))
-  }
-
-  const addOne = (event) => {
-    event.preventDefault()
-    const content = event.target.sentence.value
-    event.target.sentence.value = ''
-    dispatch(createAnecdote(content))
   }
 
   return (
@@ -32,11 +26,7 @@ const App = () => {
           </div>
         </div>
       )}
-      <h2>create new</h2>
-      <form onSubmit={addOne}>
-        <div><input name="sentence"/></div>
-        <button>create</button>
-      </form>
+      <AnecodoteForm />
     </div>
   )
 }
