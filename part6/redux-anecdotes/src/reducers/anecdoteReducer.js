@@ -32,11 +32,13 @@ const reducer = (state = initialState, action) => {
       }
       return state.map(item => item.id === id? voteChange : item)
     }
+    case 'NEW_SENTENCE': {
+      const newObject = asObject(action.data)
+      return state.concat(newObject)
+    }
     default: 
       return state
   }
-
-  return state
 }
 
 export default reducer
