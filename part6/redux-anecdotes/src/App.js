@@ -1,27 +1,21 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { generateVote, createAnecdote } from './reducers/anecdoteReducer'
 
 const App = () => {
   //array sorted method
   const byVotes = (a,b) => b.votes > a.votes ? 1 : -1
-
-  const anecdotes = useSelector(state => state).sort(byVotes)
+  const anecdotes = useSelector(state => state).map(a => a).sort(byVotes)
   const dispatch = useDispatch()
 
   const vote = (id) => {
-    dispatch({
-      type:'VOTE',
-      data: {id}
-    })
+    dispatch(generateVote(id))
   }
 
   const addOne = (event) => {
     event.preventDefault()
     const content = event.target.sentence.value
     event.target.sentence.value = ''
-    dispatch({
-      type:'NEW_SENTENCE',
-      data: content
-    })
+    dispatch(createAnecdote(content))
   }
 
   return (
