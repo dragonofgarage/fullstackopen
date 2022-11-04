@@ -1,4 +1,4 @@
-import { generateVote } from "../reducers/anecdoteReducer"
+import { generateVote } from "../reducers/store"
 import { useDispatch, useSelector } from "react-redux"
 
 
