@@ -38,8 +38,10 @@ const anecdoteSlice = createSlice({
       const newObject = asObject(action.payload)
       state.push(newObject)
     }
-  }
+  },
 })
 
+
+
 export const { generateVote, createAnecdote } = anecdoteSlice.actions
-export default anecdoteSlice
+export default anecdoteSlice.reducer

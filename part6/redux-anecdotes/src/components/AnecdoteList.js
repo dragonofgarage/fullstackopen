@@ -7,7 +7,10 @@ const AnecdoteList = () => {
 
   //array sorted method
   const byVotes = (a,b) => b.votes > a.votes ? 1 : -1
-  const anecdotes = useSelector(state => state).map(a => a).sort(byVotes)
+
+  //This place "state -> state" , after using toolkit/ combinning reducer, has to be chaged as state.anecdote
+  //otherwise, the app will always raise errors.
+  const anecdotes = useSelector(state => state.anecdote).map(a => a).sort(byVotes)
   
   const vote = (id) => {
     dispatch(generateVote(id))
