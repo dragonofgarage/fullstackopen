@@ -13,10 +13,11 @@ const store = configureStore({
   }
 })
 
-console.log(store.getState())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>
 )
+
+console.log(store.getState())

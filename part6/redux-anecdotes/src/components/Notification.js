@@ -8,8 +8,8 @@ const Notification = () => {
     borderWidth: 1
   }
   return (
-    <div style={style}>
-      {notification}
+    <div style={notification.isDisplay? style :  {display: 'none'}}>
+      {notification.data}
     </div>
   )
 }
