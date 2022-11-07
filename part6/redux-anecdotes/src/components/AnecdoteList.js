@@ -11,7 +11,18 @@ const AnecdoteList = () => {
 
   //This place "state -> state" , after using toolkit/ combinning reducer, has to be chaged as state.anecdote
   //otherwise, the app will always raise errors.
-  const anecdotes = useSelector(state => state.anecdote).map(a => a).sort(byVotes)
+  const filter = useSelector(state => state.filter)
+  const anecdotes = useSelector(state => state.anecdote)
+    .filter(
+      item => {
+        if(!filter)
+          return item
+        else {
+          let regexp = new RegExp(`${filter}`,"i")
+          return item.content.match(regexp) ? 1 : 0
+        }
+    }).sort(byVotes)
+  //map(a => a).sort(byVotes)
   
   const vote = (anecdote) => {
     dispatch(generateVote(anecdote.id))

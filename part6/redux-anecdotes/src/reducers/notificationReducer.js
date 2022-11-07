@@ -1,10 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-/*const initialState = {
-  state: 'OFF',
-  message: ''
- }*/ //notificationAtStart.map(item => item)
-
 const notificationSlice = createSlice({
   name: 'notification',
   initialState: {
@@ -13,7 +8,6 @@ const notificationSlice = createSlice({
   },
   reducers: {
     setNotification(state, action) {
-      console.log(action)
       const message = action.payload
       const newState = {
         ...state,
