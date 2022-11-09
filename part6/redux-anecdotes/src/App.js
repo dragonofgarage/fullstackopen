@@ -3,7 +3,6 @@ import AnecodoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 import Notification from './components/Notification'
 import Filter from './components/Filter'
-import { setAnecdote } from './reducers/store'
 import { useDispatch } from 'react-redux'
 import { initializeAnecdote } from './reducers/store'
 

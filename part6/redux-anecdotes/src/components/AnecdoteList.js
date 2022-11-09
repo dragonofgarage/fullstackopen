@@ -22,10 +22,9 @@ const AnecdoteList = () => {
           return item.content.match(regexp) ? 1 : 0
         }
     }).sort(byVotes)
-  //map(a => a).sort(byVotes)
   
-  const vote = (anecdote) => {
-    dispatch(generateVote(anecdote.id))
+  const vote = async (anecdote) => {
+    dispatch(generateVote(anecdote))
     dispatch(setNotification(`you voted '${anecdote.content}'`))
     setTimeout(() => {
       dispatch(cleanNotification())
