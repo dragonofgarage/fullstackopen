@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux"
 import { createNew } from "../reducers/store"
-import { setNotification, cleanNotification } from "../reducers/notificationReducer"
-import anecdotesService from '../services/anecdotes'
+import { setNotification } from "../reducers/notificationReducer"
 
 
 const AnecodoteForm = () => {
@@ -12,10 +11,7 @@ const AnecodoteForm = () => {
     const content = event.target.sentence.value
     event.target.sentence.value = ''
     dispatch(createNew(content))
-    dispatch(setNotification(`you added '${content}'`))
-    setTimeout(() => {
-      dispatch(cleanNotification())
-    }, 1000);
+    dispatch(setNotification(`you added '${content}'`, 10))
   }
 
   return(
