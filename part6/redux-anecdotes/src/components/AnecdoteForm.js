@@ -10,7 +10,7 @@ const AnecodoteForm = (props) => {
     const content = event.target.sentence.value
     event.target.sentence.value = ''
     props.createNew(content)
-    props.setNotification(`you added '${content}'`, 10)
+    props.setNotification(`you added '${content}'`, 5000)
   }
 
   return(

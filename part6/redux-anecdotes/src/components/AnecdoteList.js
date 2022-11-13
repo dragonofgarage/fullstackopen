@@ -25,7 +25,7 @@ const AnecdoteList = () => {
   
   const vote = async (anecdote) => {
     dispatch(generateVote(anecdote))
-    dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
+    dispatch(setNotification(`you voted '${anecdote.content}'`, 5000))
   }
   return(
     <div>
