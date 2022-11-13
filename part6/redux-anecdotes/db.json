@@ -47,7 +47,7 @@
     },
     {
       "content": "nice to meet u",
-      "votes": 13,
+      "votes": 14,
       "id": "nW_f9mB"
     },
     {
@@ -59,6 +59,11 @@
       "content": "it's zero",
       "votes": 2,
       "id": "V-FevTR"
+    },
+    {
+      "content": "redux connect test",
+      "votes": 2,
+      "id": "CTMqmsv"
     }
   ]
 }
