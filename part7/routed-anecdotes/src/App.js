@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   BrowserRouter as Router,
   Routes, Route, Link,
-  useParams
+  useParams, useNavigate, Navigate
 } from "react-router-dom"
 
 const Menu = () => {
@@ -69,6 +69,7 @@ const CreateNew = (props) => {
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -78,6 +79,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    navigate('/')
   }
 
   return (
@@ -122,10 +124,18 @@ const App = () => {
   ])
 
   const [notification, setNotification] = useState('')
+  
+  //record the id of setTimeout for cleaning it before a new setTimeout begin
+  let timeOutId
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    clearTimeout(timeOutId)
+    setNotification(`a new anecdote ${anecdote.content} created!`)
+    timeOutId = setTimeout(() => {
+      setNotification('')
+    }, "5000")
   }
 
   const anecdoteById = (id) =>
@@ -145,7 +155,7 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
-
+      <p style= {{notification} ? {} : {display : "none"}} >{notification}</p>
       <Router>
         <Menu />
         <Routes>
