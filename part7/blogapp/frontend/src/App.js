@@ -14,11 +14,12 @@ import {
   deleteBlog,
 } from './reducers/blogReducer'
 import { createNotification } from './reducers/notificationReducer'
+import { setUser } from './reducers/userReducer'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
 
   //for hideing form when create new
   const noteFormRef = useRef()
@@ -27,6 +28,7 @@ const App = () => {
 
   const { message, error } = useSelector((state) => state.notification)
   const blogs = useSelector((state) => state.blogs)
+  const user = useSelector((state) => state.user)
 
   useEffect(() => {
     dispatch(initialStateBlogs())
@@ -37,7 +39,7 @@ const App = () => {
     const loggedUserJson = window.localStorage.getItem('loggedNoteappUser')
     if (loggedUserJson) {
       const user = JSON.parse(loggedUserJson)
-      setUser(user)
+      dispatch(setUser(user))
       blogService.setToken(user.token)
     }
   }, [])
@@ -53,7 +55,7 @@ const App = () => {
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
 
       blogService.setToken(user.token)
-      setUser(user)
+      dispatch(setUser(user))
       setUsername('')
       setPassword('')
 
@@ -72,7 +74,7 @@ const App = () => {
 
   const handleLogout = () => {
     window.localStorage.clear()
-    setUser(null)
+    dispatch(setUser(null))
   }
 
   const handleCreateBlog = async (newObject) => {
