@@ -148,10 +148,16 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h2>blogs</h2>
+        <header>
+          <nav className="navigation">
+            <Link to={'/'}>blogs</Link>
+            <Link to={'/users'}>users</Link>
+            <p>{user.username} logged in</p>
+            <button onClick={handleLogout}>logout</button>
+          </nav>
+        </header>
         <Notification message={message} isError={error} />
-        <p>{user.username} logged in</p>
-        <button onClick={handleLogout}>logout</button>
+        <h2>blog app</h2>
       </div>
 
       <Routes>

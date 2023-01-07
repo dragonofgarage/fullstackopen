@@ -17,3 +17,19 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+
+/* navigation */
+.navigation {
+  background-color: gainsboro;
+  padding: 5px 0;
+  margin-bottom: 10px;
+}
+
+.navigation a,
+.navigation p {
+  padding: 0 5px;
+}
+
+.navigation p {
+  display: inline;
+}
