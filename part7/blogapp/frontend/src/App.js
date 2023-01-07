@@ -5,6 +5,7 @@ import Notification from './components/Notification'
 import { useDispatch, useSelector } from 'react-redux'
 import Home from './components/Home'
 import Users from './components/Users'
+import User from './components/User'
 import {
   setBlogs,
   initialStateBlogs,
@@ -12,6 +13,7 @@ import {
   createBlog,
   deleteBlog,
 } from './reducers/blogReducer'
+import { initialStateUsers } from './reducers/usersReducer'
 import { createNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
@@ -25,10 +27,13 @@ const App = () => {
 
   const { message, error } = useSelector((state) => state.notification)
   const blogs = useSelector((state) => state.blogs)
+  //this user variable is used to save the present login user
   const user = useSelector((state) => state.user)
+  const users = useSelector((state) => state.users)
 
   useEffect(() => {
     dispatch(initialStateBlogs())
+    dispatch(initialStateUsers())
   }, [dispatch])
 
   //get token
@@ -149,7 +154,8 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/users" element=<Users /> />
+        <Route path="/users" element=<Users users={users} /> />
+        <Route path="/users/:id" element=<User users={users} /> />
         <Route
           path="/"
           element={
