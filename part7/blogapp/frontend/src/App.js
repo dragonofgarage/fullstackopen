@@ -17,6 +17,7 @@ import { initialStateUsers } from './reducers/usersReducer'
 import { createNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import SingleBlogPage from './components/SingleBlogPage'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -168,6 +169,13 @@ const App = () => {
               user={user}
             />
           }
+        />
+        <Route
+          path="/blogs/:id"
+          element=<SingleBlogPage
+            blogs={blogs}
+            handleUpdateLikes={handleUpdateLikes}
+          />
         />
       </Routes>
     </Router>
