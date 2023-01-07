@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
-import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
-import Togglable from './components/Togglable'
 import { useDispatch, useSelector } from 'react-redux'
+import Home from './components/Home'
+import Users from './components/Users'
 import {
   setBlogs,
   initialStateBlogs,
@@ -15,13 +14,11 @@ import {
 } from './reducers/blogReducer'
 import { createNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  // const [user, setUser] = useState(null)
-
-  //for hideing form when create new
   const noteFormRef = useRef()
 
   const dispatch = useDispatch()
@@ -143,29 +140,31 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h2>blogs</h2>
-      <Notification message={message} isError={error} />
-      <p>
-        {user.username} logged in
+    <Router>
+      <div>
+        <h2>blogs</h2>
+        <Notification message={message} isError={error} />
+        <p>{user.username} logged in</p>
         <button onClick={handleLogout}>logout</button>
-      </p>
-      <Togglable buttonLabel="create new blog" ref={noteFormRef}>
-        <BlogForm createBlog={handleCreateBlog} />
-      </Togglable>
-      {blogs
-        .map((blog) => blog)
-        .sort((a, b) => (a.likes > b.likes ? -1 : 1))
-        .map((blog) => (
-          <Blog
-            key={blog.id}
-            blog={blog}
-            handleUpdateLikes={handleUpdateLikes}
-            handleRemoveBlog={handleRemoveBlog}
-            user={user} // pass user info to component
-          />
-        ))}
-    </div>
+      </div>
+
+      <Routes>
+        <Route path="/users" element=<Users /> />
+        <Route
+          path="/"
+          element={
+            <Home
+              noteFormRef={noteFormRef}
+              handleCreateBlog={handleCreateBlog}
+              handleRemoveBlog={handleRemoveBlog}
+              handleUpdateLikes={handleUpdateLikes}
+              blogs={blogs}
+              user={user}
+            />
+          }
+        />
+      </Routes>
+    </Router>
   )
 }
 
