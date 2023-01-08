@@ -14,10 +14,12 @@ import {
   deleteBlog,
 } from './reducers/blogReducer'
 import { initialStateUsers } from './reducers/usersReducer'
+import { initialStateComments } from './reducers/commentsReducer'
 import { createNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SingleBlogPage from './components/SingleBlogPage'
+import comments from './services/comments'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -31,10 +33,12 @@ const App = () => {
   //this user variable is used to save the present login user
   const user = useSelector((state) => state.user)
   const users = useSelector((state) => state.users)
+  const comments = useSelector((state) => state.comments)
 
   useEffect(() => {
     dispatch(initialStateBlogs())
     dispatch(initialStateUsers())
+    dispatch(initialStateComments())
   }, [dispatch])
 
   //get token
@@ -148,14 +152,12 @@ const App = () => {
   return (
     <Router>
       <div>
-        <header>
-          <nav className="navigation">
-            <Link to={'/'}>blogs</Link>
-            <Link to={'/users'}>users</Link>
-            <p>{user.username} logged in</p>
-            <button onClick={handleLogout}>logout</button>
-          </nav>
-        </header>
+        <nav className="navigation">
+          <Link to={'/'}>blogs</Link>
+          <Link to={'/users'}>users</Link>
+          <p>{user.username} logged in</p>
+          <button onClick={handleLogout}>logout</button>
+        </nav>
         <Notification message={message} isError={error} />
         <h2>blog app</h2>
       </div>
@@ -180,6 +182,7 @@ const App = () => {
           path="/blogs/:id"
           element=<SingleBlogPage
             blogs={blogs}
+            comments={comments}
             handleUpdateLikes={handleUpdateLikes}
           />
         />
