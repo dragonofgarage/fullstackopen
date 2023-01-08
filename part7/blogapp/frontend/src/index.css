@@ -33,3 +33,9 @@
 .navigation p {
   display: inline;
 }
+
+/* submit input */
+.submit-input {
+  display: inline;
+  margin-right: 5px;
+}

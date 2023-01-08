@@ -20,4 +20,12 @@ export const initialStateComments = () => {
   }
 }
 
+export const createComment = (comments, newObject) => {
+  return async (dispatch) => {
+    const response = await commentsService.create(newObject)
+
+    dispatch(setComments(comments.concat(response)))
+  }
+}
+
 export default commentsSlice.reducer

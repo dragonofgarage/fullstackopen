@@ -19,7 +19,6 @@ import { createNotification } from './reducers/notificationReducer'
 import { setUser } from './reducers/userReducer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SingleBlogPage from './components/SingleBlogPage'
-import comments from './services/comments'
 
 const App = () => {
   const [username, setUsername] = useState('')
