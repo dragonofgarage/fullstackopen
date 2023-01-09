@@ -1,3 +1,4 @@
+import { TableCell, TableRow } from '@mui/material'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -13,7 +14,7 @@ const Blog = ({ blog, handleUpdateLikes, handleRemoveBlog, user }) => {
   }
 
   const showButtonStyle = {
-    display: 'inline-block',
+    verticalAlign: 'text-top',
   }
 
   const blogListStyle = {
@@ -44,33 +45,35 @@ const Blog = ({ blog, handleUpdateLikes, handleRemoveBlog, user }) => {
   }
 
   return (
-    <div style={blogBlock} className="blog">
-      <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
-      <div style={showButtonStyle}>
+    <TableRow className="blog">
+      <TableCell component="th" scope="row">
+        <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+        <div style={showWhenVisible} className="blogDetail">
+          <ul style={blogListStyle}>
+            <li className="blogUrl">{blog.url}</li>
+            <li className="likes">
+              likes: {blog.likes}
+              <button className="likeBtn" onClick={updateLikes}>
+                like
+              </button>
+            </li>
+            <li>{blog.author}</li>
+          </ul>
+          {
+            <button style={showRemoveBtn} onClick={removeBlog}>
+              remove
+            </button>
+          }
+        </div>
+      </TableCell>
+      <TableCell style={showButtonStyle} align="right">
         {
           <button onClick={handleShowDetail} className="detailButton">
             {showDetail ? 'hide' : 'view'}
           </button>
         }
-      </div>
-      <div style={showWhenVisible} className="blogDetail">
-        <ul style={blogListStyle}>
-          <li className="blogUrl">{blog.url}</li>
-          <li className="likes">
-            likes: {blog.likes}
-            <button className="likeBtn" onClick={updateLikes}>
-              like
-            </button>
-          </li>
-          <li>{blog.author}</li>
-        </ul>
-        {
-          <button style={showRemoveBtn} onClick={removeBlog}>
-            remove
-          </button>
-        }
-      </div>
-    </div>
+      </TableCell>
+    </TableRow>
   )
 }
 

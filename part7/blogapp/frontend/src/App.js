@@ -20,6 +20,8 @@ import { setUser } from './reducers/userReducer'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import SingleBlogPage from './components/SingleBlogPage'
 
+import { Button, Container, TextField } from '@mui/material'
+
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -114,26 +116,31 @@ const App = () => {
     <div>
       <form onSubmit={handleLogin}>
         <div>
-          username
-          <input
+          <TextField
             id="username"
             type="text"
             value={username}
-            name="username"
+            label="username"
             onChange={({ target }) => setUsername(target.value)}
+            margin="normal"
+            size="small"
           />
         </div>
         <div>
-          password
-          <input
+          <TextField
             id="password"
             type="text"
             value={password}
-            name="password"
+            label="password"
             onChange={({ target }) => setPassword(target.value)}
+            size="small"
           />
         </div>
-        <button type="submit">login</button>
+        <div className="login-btn">
+          <Button variant="contained" color="primary" type="submit">
+            login
+          </Button>
+        </div>
       </form>
     </div>
   )
@@ -149,44 +156,46 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div>
-        <nav className="navigation">
-          <Link to={'/'}>blogs</Link>
-          <Link to={'/users'}>users</Link>
-          <p>{user.username} logged in</p>
-          <button onClick={handleLogout}>logout</button>
-        </nav>
-        <Notification message={message} isError={error} />
-        <h2>blog app</h2>
-      </div>
+    <Container>
+      <Router>
+        <div>
+          <nav className="navigation">
+            <Link to={'/'}>blogs</Link>
+            <Link to={'/users'}>users</Link>
+            <p>{user.username} logged in</p>
+            <button onClick={handleLogout}>logout</button>
+          </nav>
+          <Notification message={message} isError={error} />
+          <h2>blog app</h2>
+        </div>
 
-      <Routes>
-        <Route path="/users" element=<Users users={users} /> />
-        <Route path="/users/:id" element=<User users={users} /> />
-        <Route
-          path="/"
-          element={
-            <Home
-              noteFormRef={noteFormRef}
-              handleCreateBlog={handleCreateBlog}
-              handleRemoveBlog={handleRemoveBlog}
-              handleUpdateLikes={handleUpdateLikes}
-              blogs={blogs}
-              user={user}
-            />
-          }
-        />
-        <Route
-          path="/blogs/:id"
-          element=<SingleBlogPage
-            blogs={blogs}
-            comments={comments}
-            handleUpdateLikes={handleUpdateLikes}
+        <Routes>
+          <Route path="/users" element=<Users users={users} /> />
+          <Route path="/users/:id" element=<User users={users} /> />
+          <Route
+            path="/"
+            element={
+              <Home
+                noteFormRef={noteFormRef}
+                handleCreateBlog={handleCreateBlog}
+                handleRemoveBlog={handleRemoveBlog}
+                handleUpdateLikes={handleUpdateLikes}
+                blogs={blogs}
+                user={user}
+              />
+            }
           />
-        />
-      </Routes>
-    </Router>
+          <Route
+            path="/blogs/:id"
+            element=<SingleBlogPage
+              blogs={blogs}
+              comments={comments}
+              handleUpdateLikes={handleUpdateLikes}
+            />
+          />
+        </Routes>
+      </Router>
+    </Container>
   )
 }
 
